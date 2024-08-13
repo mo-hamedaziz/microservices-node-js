@@ -1,17 +1,17 @@
-const express = require('express');
-require('express-async-errors');
-const sequelize = require('./config/database');
-const authRoutes = require('./routes/authRoutes');
+const express = require("express");
+require("express-async-errors");
+const sequelize = require("./config/database");
+const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 app.use(express.json());
 
-const port = process.env.PORT ?? 3000;
+const PORT = process.env.PORT || 3000;
 
 app.listen(port, () => {
-  console.log(`Users Service running on port ${port}`);
+  console.log(`Authentication service is up and running at ${PORT}`);
 });
 
-app.use('/auth', authRoutes);
+app.use("/auth", authRoutes);
 
 sequelize.sync();
