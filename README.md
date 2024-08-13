@@ -1,2 +1,4 @@
 # microservices-node-js
-tutorial link: [here](https://www.youtube.com/watch?v=gesxvFh0U84)
+## Diagram
+![image](https://github.com/user-attachments/assets/1a47e1e0-58df-4993-b933-301ae2a614ba)
+
