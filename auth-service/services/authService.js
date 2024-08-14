@@ -10,7 +10,7 @@ exports.createUser = async (userData) => {
 };
 
 exports.findUserByEmail = async (email) => {
-  return await User.findOne({ where: { email } });
+  return await User.findOne({ email });
 };
 
 exports.comparePassword = async (enteredPassword, storedPassword) => {
