@@ -2,6 +2,7 @@ services:
   auth-db:
     image: mongo
     container_name: auth-db
+    restart: always
     ports:
       - "27018:27017"
     volumes:
@@ -9,8 +10,6 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: user
       MONGO_INITDB_ROOT_PASSWORD: pass
-    #networks:
-    #  - auth-network
 
   auth-service:
     build:
@@ -19,16 +18,8 @@ services:
     container_name: auth-service
     ports:
       - "3001:3000"
-    depends_on:
-      - auth-db
     volumes:
       - ./auth-service:/app
-    #networks:
-    #  - auth-network
 
 volumes:
   auth-data:
-
-# networks:
-#   auth-network:
-#     driver: bridge
