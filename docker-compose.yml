@@ -3,15 +3,17 @@ services:
     image: mongo
     container_name: auth-db
     restart: always
-    ports:
-      - "27018:27017"
     volumes:
       - auth-data:/data/db
     environment:
-      MONGO_INITDB_ROOT_USERNAME: user
-      MONGO_INITDB_ROOT_PASSWORD: pass
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+    networks:
+      - auth-network
 
   auth-service:
+    depends_on:
+      - auth-db
     build:
       context: ./auth-service
       dockerfile: Dockerfile
@@ -20,6 +22,12 @@ services:
       - "3001:3000"
     volumes:
       - ./auth-service:/app
+    networks:
+      - auth-network
 
 volumes:
   auth-data:
+
+networks:
+  auth-network:
+    driver: bridge
