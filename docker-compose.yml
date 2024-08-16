@@ -6,8 +6,8 @@ services:
     volumes:
       - auth-data:/data/db
     environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      MONGO_INITDB_ROOT_USERNAME: ${AUTH_MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${AUTH_MONGO_INITDB_ROOT_PASSWORD}
     networks:
       - auth-network
 
@@ -25,9 +25,48 @@ services:
     networks:
       - auth-network
 
+  products-db:
+    image: mongo
+    container_name: products-db
+    restart: always
+    volumes:
+      - products-data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${PRODUCT_MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${PRODUCT_MONGO_INITDB_ROOT_PASSWORD}
+    networks:
+      - products-network
+  
+  products-service:
+    depends_on:
+      - products-db
+    build:
+      context: ./products-service
+      dockerfile: Dockerfile
+    container_name: products-service
+    ports:
+      - "3002:3000"
+    volumes:
+      - ./products-service:/app
+    networks:
+      - products-network
+      - auth-network
+
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - products-network
+
 volumes:
   auth-data:
+  products-data:
 
 networks:
   auth-network:
+    driver: bridge
+  products-network:
     driver: bridge
