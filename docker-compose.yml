@@ -12,6 +12,8 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
 
   auth-service:
+    depends_on:
+      - auth-db
     build:
       context: ./auth-service
       dockerfile: Dockerfile
