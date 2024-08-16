@@ -23,7 +23,7 @@ ENV PATH app/node_modules/.bin:$PATH
 FROM base as dev
 ENV NODE_ENV=development
 RUN npm install --only=development
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]
 
 FROM base as prod
 COPY --chown=node:node . .

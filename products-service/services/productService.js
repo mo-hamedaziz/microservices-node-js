@@ -1,26 +1,18 @@
-const Product = require('../models/product.model');
-const Sequelize = require('sequelize');
-const RabbitMQService = require('./rabbitmq.service');
+const Product = require('../models/Product');
 
 exports.getAllProducts = async () => {
-  return await Product.findAll();
+  return await Product.find();
 };
 
-exports.createProduct = async (productData) => {
-  return await Product.create(productData);
+exports.createProduct = async (data) => {
+  const product = new Product(data);
+  return await product.save();
 };
 
-exports.buyProducts = async (ids, userEmail) => {
-  const products = await Product.findAll({
-    where: {
-      id: {
-        [Sequelize.Op.in]: ids,
-      },
+exports.findProductsByIds = async (ids) => {
+  return await Product.find({
+    _id: {
+      $in: ids,
     },
   });
-
-  RabbitMQService.sendOrder({ products, userEmail });
-
-  const order = await RabbitMQService.receiveOrder();
-  return order;
 };
