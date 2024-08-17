@@ -25,7 +25,11 @@ ENV NODE_ENV=development
 RUN npm install --only=development
 CMD ["npm", "run", "dev"]
 
+# Production stage
 FROM base as prod
+# Copy the entire project (excluding files listed in .dockerignore)
 COPY --chown=node:node . .
-HEALTHCHECK --interval=600s CMD node ./src/healthcheck.js
-CMD ["node", "./index.js"]
+# Ensure the service is health-checked
+HEALTHCHECK --interval=60s CMD node ./utils/healthcheck.js
+# Start the application
+CMD ["node", "index.js"]
