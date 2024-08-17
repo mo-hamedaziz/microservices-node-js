@@ -1,15 +1,14 @@
 const express = require('express');
 require('express-async-errors');
 require('dotenv').config();
-// const connectDB = require('./config/database');
-const mongoose = require("./config/database");
+const connectDB = require('./config/database');
 const { connectRabbitMQ } = require('./config/rabbitmq');
 const productRoutes = require('./routes/productRoutes');
 
 const app = express();
 
 // Connect to MongoDB
-//connectDB();
+connectDB();
 
 // Connect to RabbitMQ
 connectRabbitMQ();
