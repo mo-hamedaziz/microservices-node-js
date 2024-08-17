@@ -41,6 +41,6 @@ FROM base as prod
 # Copy the entire project (excluding files listed in .dockerignore)
 COPY --chown=node:node . .
 # Ensure the service is health-checked
-HEALTHCHECK --interval=600s CMD node ./utils/healthcheck.js
+HEALTHCHECK --interval=60s CMD node ./utils/healthcheck.js
 # Start the application
 CMD ["node", "index.js"]

@@ -6,8 +6,8 @@ services:
     volumes:
       - auth-data:/data/db
     environment:
-      MONGO_INITDB_ROOT_USERNAME: authuser #${AUTH_MONGO_INITDB_ROOT_USERNAME}
-      MONGO_INITDB_ROOT_PASSWORD: authpass #${AUTH_MONGO_INITDB_ROOT_PASSWORD}
+      MONGO_INITDB_ROOT_USERNAME: ${AUTH_MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${AUTH_MONGO_INITDB_ROOT_PASSWORD}
     networks:
       - auth-network
 
@@ -17,6 +17,8 @@ services:
     build:
       context: ./auth-service
       dockerfile: Dockerfile
+    env_file:
+      - ./auth-service/.env
     container_name: auth-service
     ports:
       - "3001:3000"
@@ -32,8 +34,8 @@ services:
     volumes:
       - products-data:/data/db
     environment:
-      MONGO_INITDB_ROOT_USERNAME: productuser #${PRODUCT_MONGO_INITDB_ROOT_USERNAME}
-      MONGO_INITDB_ROOT_PASSWORD: productpass #${PRODUCT_MONGO_INITDB_ROOT_PASSWORD}
+      MONGO_INITDB_ROOT_USERNAME: ${PRODUCT_MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${PRODUCT_MONGO_INITDB_ROOT_PASSWORD}
     networks:
       - products-network
   
@@ -44,6 +46,8 @@ services:
     build:
       context: ./products-service
       dockerfile: Dockerfile
+    env_file: 
+      - ./products-service/.env
     container_name: products-service
     ports:
       - "3002:3000"
@@ -60,7 +64,6 @@ services:
       - "5672:5672"
       - "15672:15672"
     networks:
-      - products-network
       - queue-network
 
 volumes:

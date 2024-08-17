@@ -1,27 +1,34 @@
-// config/rabbitmq.js
 const amqp = require('amqplib');
 
 let channel;
 
-const connectRabbitMQ = () => {
-  console.log('Attempting to connect to RabbitMQ...');
+const connectRabbitMQ = (retries = 5, delay = 5000) => {
   const amqpServer = process.env.RABBITMQ_URL;
 
-  return amqp.connect(amqpServer)
-    .then((connection) => {
-      return connection.createChannel();
-    })
-    .then((ch) => {
-      channel = ch;
-      return channel.assertQueue('PRODUCT');
-    })
-    .then(() => {
-      console.log('Connected to RabbitMQ successfully.');
-    })
-    .catch((error) => {
-      console.error('Failed to connect to RabbitMQ:', error.message);
-      process.exit(1); // Exit the process if the connection fails
-    });
+  const attemptConnection = (attempt) => {
+    return amqp.connect(amqpServer)
+      .then((connection) => {
+        return connection.createChannel();
+      })
+      .then((ch) => {
+        channel = ch;
+        return channel.assertQueue('PRODUCT');
+      })
+      .then(() => {
+        console.log('Connected to RabbitMQ successfully.');
+      })
+      .catch((error) => {
+        if (attempt < retries) {
+          console.log(`Retrying connection to RabbitMQ (${attempt}/${retries})...`);
+          return new Promise((resolve) => setTimeout(() => attemptConnection(attempt + 1).then(resolve), delay));
+        } else {
+          console.error('Failed to connect to RabbitMQ:', error.message);
+          return Promise.reject(error);
+        }
+      });
+  };
+
+  return attemptConnection(1);
 };
 
 const getChannel = () => channel;

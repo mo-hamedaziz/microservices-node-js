@@ -1,4 +1,3 @@
-// config/database.js
 const mongoose = require('mongoose');
 
 const connectDB = () => {
@@ -9,7 +8,7 @@ const connectDB = () => {
     })
     .catch((error) => {
       console.error('Failed to connect to MongoDB:', error.message);
-      process.exit(1); // Exit the process if the connection fails
+      process.exit(1);
     });
 };
 
