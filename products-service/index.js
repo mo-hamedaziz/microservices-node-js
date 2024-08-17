@@ -1,13 +1,15 @@
 const express = require('express');
 require('express-async-errors');
-const connectDB = require('./config/database');
+require('dotenv').config();
+// const connectDB = require('./config/database');
+const mongoose = require("./config/database");
 const { connectRabbitMQ } = require('./config/rabbitmq');
-const productRoutes = require('./routes/product.routes');
+const productRoutes = require('./routes/productRoutes');
 
 const app = express();
 
 // Connect to MongoDB
-connectDB();
+//connectDB();
 
 // Connect to RabbitMQ
 connectRabbitMQ();
@@ -17,7 +19,7 @@ app.use(express.json());
 // Routes
 app.use('/api', productRoutes);
 
-const port = process.env.PORT ?? 3000;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Products Service running on port ${port}`);
 });
