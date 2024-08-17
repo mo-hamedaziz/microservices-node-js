@@ -18,11 +18,7 @@ const startServer = async () => {
     });
 
     // Connect to RabbitMQ
-    await new Promise((resolve, reject) => {
-      connectRabbitMQ()
-        .then(resolve)
-        .catch(reject);
-    });
+    await connectRabbitMQ();
 
     // Start the Express server
     app.use(express.json());
