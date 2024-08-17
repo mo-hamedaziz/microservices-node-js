@@ -64,7 +64,6 @@ services:
       - "5672:5672"
       - "15672:15672"
     networks:
-      - products-network
       - queue-network
 
 volumes:
