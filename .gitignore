@@ -1,4 +1,8 @@
 node_modules/
 .env
+
 auth-service/.env
 auth-service/node_modules/
+
+products-service/.env
+products-service/node_modules/
