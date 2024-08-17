@@ -15,13 +15,15 @@ const startServer = async () => {
       connectDB().then(resolve).catch(reject);
     });
 
-    swaggerDocs(app);
-
     // Start the Express server
     app.use(express.json());
     app.use("/auth", authRoutes);
 
-    const PORT = process.env.PORT || 3000;
+    swaggerDocs(app);
+
+    const INT_PORT = process.env.INT_PORT || 3000;
+    const EXT_PORT = process.env.EXT_PORT || 3000;
+
     app.listen(PORT, () => {
       console.log(`Authentication Service running on port ${PORT}`);
     });
