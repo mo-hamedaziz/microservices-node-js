@@ -1,4 +1,3 @@
-// config/rabbitmq.js
 const amqp = require('amqplib');
 
 let channel;
