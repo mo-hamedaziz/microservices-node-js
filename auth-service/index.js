@@ -4,6 +4,7 @@ require("dotenv").config();
 
 const connectDB = require("./config/database");
 const authRoutes = require("./routes/authRoutes");
+const swaggerDocs = require('./swagger');
 
 const app = express();
 
@@ -13,6 +14,8 @@ const startServer = async () => {
     await new Promise((resolve, reject) => {
       connectDB().then(resolve).catch(reject);
     });
+
+    swaggerDocs(app);
 
     // Start the Express server
     app.use(express.json());
