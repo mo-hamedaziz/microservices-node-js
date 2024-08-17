@@ -6,8 +6,8 @@ services:
     volumes:
       - auth-data:/data/db
     environment:
-      MONGO_INITDB_ROOT_USERNAME: authuser #${AUTH_MONGO_INITDB_ROOT_USERNAME}
-      MONGO_INITDB_ROOT_PASSWORD: authpass #${AUTH_MONGO_INITDB_ROOT_PASSWORD}
+      MONGO_INITDB_ROOT_USERNAME: ${AUTH_MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${AUTH_MONGO_INITDB_ROOT_PASSWORD}
     networks:
       - auth-network
 
@@ -32,8 +32,8 @@ services:
     volumes:
       - products-data:/data/db
     environment:
-      MONGO_INITDB_ROOT_USERNAME: productuser #${PRODUCT_MONGO_INITDB_ROOT_USERNAME}
-      MONGO_INITDB_ROOT_PASSWORD: productpass #${PRODUCT_MONGO_INITDB_ROOT_PASSWORD}
+      MONGO_INITDB_ROOT_USERNAME: ${PRODUCT_MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${PRODUCT_MONGO_INITDB_ROOT_PASSWORD}
     networks:
       - products-network
   
