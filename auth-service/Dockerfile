@@ -10,8 +10,8 @@ ENV NODE_ENV $NODE_ENV
 
 # Default to port 3000 for the application
 ARG PORT=3000
-ENV PORT $PORT
-EXPOSE $PORT
+ENV PORT $INT_PORT
+EXPOSE $INT_PORT
 
 # Install latest npm for speed and fixes
 RUN npm install -g npm@latest

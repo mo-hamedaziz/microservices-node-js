@@ -4,6 +4,7 @@ require("dotenv").config();
 
 const connectDB = require("./config/database");
 const authRoutes = require("./routes/authRoutes");
+const swaggerDocs = require('./swagger');
 
 const app = express();
 
@@ -18,9 +19,13 @@ const startServer = async () => {
     app.use(express.json());
     app.use("/auth", authRoutes);
 
-    const PORT = process.env.PORT || 3000;
-    app.listen(PORT, () => {
-      console.log(`Authentication Service running on port ${PORT}`);
+    swaggerDocs(app);
+
+    const INT_PORT = process.env.INT_PORT || 3000;
+    const EXT_PORT = process.env.EXT_PORT || 3000;
+
+    app.listen(INT_PORT, () => {
+      console.log(`Authentication Service running on port ${EXT_PORT}`);
     });
   } catch (error) {
     console.error("Failed to start the server:", error.message);
