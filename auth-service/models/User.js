@@ -1,5 +1,5 @@
-const mongoose = require('../config/database');
-const { Schema } = mongoose;
+const mongoose = require('mongoose');
+const { Schema } = mongoose;  // Correctly destructure Schema from mongoose
 
 const userSchema = new Schema({
   name: {

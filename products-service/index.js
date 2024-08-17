@@ -1,6 +1,7 @@
 const express = require('express');
 require('express-async-errors');
 require('dotenv').config();
+
 const connectDB = require('./config/database');
 const { connectRabbitMQ } = require('./config/rabbitmq');
 const productRoutes = require('./routes/productRoutes');

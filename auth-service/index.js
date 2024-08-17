@@ -1,17 +1,31 @@
 const express = require("express");
 require("express-async-errors");
-require('dotenv').config();
+require("dotenv").config();
 
-const mongoose = require("./config/database");
+const connectDB = require("./config/database");
 const authRoutes = require("./routes/authRoutes");
 
 const app = express();
-app.use(express.json());
 
-app.use("/auth", authRoutes);
+const startServer = async () => {
+  try {
+    // Connect to MongoDB
+    await new Promise((resolve, reject) => {
+      connectDB().then(resolve).catch(reject);
+    });
 
-const PORT = process.env.PORT || 3000;
+    // Start the Express server
+    app.use(express.json());
+    app.use("/auth", authRoutes);
 
-app.listen(PORT, () => {
-  console.log(`Authentication service is up and running at ${PORT}`);
-});
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+      console.log(`Authentication Service running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error("Failed to start the server:", error.message);
+    process.exit(1);
+  }
+};
+
+startServer();
