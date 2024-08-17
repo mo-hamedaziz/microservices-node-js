@@ -24,8 +24,8 @@ const startServer = async () => {
     const INT_PORT = process.env.INT_PORT || 3000;
     const EXT_PORT = process.env.EXT_PORT || 3000;
 
-    app.listen(PORT, () => {
-      console.log(`Authentication Service running on port ${PORT}`);
+    app.listen(INT_PORT, () => {
+      console.log(`Authentication Service running on port ${EXT_PORT}`);
     });
   } catch (error) {
     console.error("Failed to start the server:", error.message);
