@@ -1,8 +1,9 @@
+// config/database.js
 const mongoose = require('mongoose');
 
 const connectDB = () => {
   console.log('Attempting to connect to MongoDB...');
-  mongoose.connect(process.env.MONGO_URI)
+  return mongoose.connect(process.env.MONGO_URI)
     .then(() => {
       console.log('MongoDB connected successfully.');
     })

@@ -1,3 +1,4 @@
+// index.js
 const express = require('express');
 require('express-async-errors');
 require('dotenv').config();
@@ -7,18 +8,34 @@ const productRoutes = require('./routes/productRoutes');
 
 const app = express();
 
-// Connect to MongoDB
-connectDB();
+const startServer = async () => {
+  try {
+    // Connect to MongoDB
+    await new Promise((resolve, reject) => {
+      connectDB()
+        .then(resolve)
+        .catch(reject);
+    });
 
-// Connect to RabbitMQ
-connectRabbitMQ();
+    // Connect to RabbitMQ
+    await new Promise((resolve, reject) => {
+      connectRabbitMQ()
+        .then(resolve)
+        .catch(reject);
+    });
 
-app.use(express.json());
+    // Start the Express server
+    app.use(express.json());
+    app.use('/api', productRoutes);
 
-// Routes
-app.use('/api', productRoutes);
+    const port = process.env.PORT || 3000;
+    app.listen(port, () => {
+      console.log(`Products Service running on port ${port}`);
+    });
+  } catch (error) {
+    console.error('Failed to start the server:', error.message);
+    process.exit(1);
+  }
+};
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Products Service running on port ${port}`);
-});
+startServer();

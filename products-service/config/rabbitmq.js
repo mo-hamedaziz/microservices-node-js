@@ -1,18 +1,27 @@
+// config/rabbitmq.js
 const amqp = require('amqplib');
 
 let channel;
 
-const connectRabbitMQ = async () => {
-  try {
-    const amqpServer = process.env.RABBITMQ_URL;
-    const connection = await amqp.connect(amqpServer);
-    channel = await connection.createChannel();
-    await channel.assertQueue('PRODUCT');
-    console.log('Connected to RabbitMQ successfully.');
-  } catch (error) {
-    console.error('Failed to connect to RabbitMQ:', error.message);
-    process.exit(1);
-  }
+const connectRabbitMQ = () => {
+  console.log('Attempting to connect to RabbitMQ...');
+  const amqpServer = process.env.RABBITMQ_URL;
+
+  return amqp.connect(amqpServer)
+    .then((connection) => {
+      return connection.createChannel();
+    })
+    .then((ch) => {
+      channel = ch;
+      return channel.assertQueue('PRODUCT');
+    })
+    .then(() => {
+      console.log('Connected to RabbitMQ successfully.');
+    })
+    .catch((error) => {
+      console.error('Failed to connect to RabbitMQ:', error.message);
+      process.exit(1); // Exit the process if the connection fails
+    });
 };
 
 const getChannel = () => channel;

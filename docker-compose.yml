@@ -51,6 +51,7 @@ services:
       - ./products-service:/app
     networks:
       - products-network
+      - queue-network
 
   rabbitmq:
     image: rabbitmq:management
@@ -60,6 +61,7 @@ services:
       - "15672:15672"
     networks:
       - products-network
+      - queue-network
 
 volumes:
   auth-data:
@@ -69,4 +71,6 @@ networks:
   auth-network:
     driver: bridge
   products-network:
+    driver: bridge
+  queue-network:  
     driver: bridge
