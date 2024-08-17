@@ -5,6 +5,7 @@ require('dotenv').config();
 const connectDB = require('./config/database');
 const { connectRabbitMQ } = require('./config/rabbitmq');
 const productRoutes = require('./routes/productRoutes');
+const swaggerDocs = require('./swagger');
 
 const app = express();
 
@@ -24,9 +25,13 @@ const startServer = async () => {
     app.use(express.json());
     app.use('/api', productRoutes);
 
-    const PORT = process.env.PORT || 3000;
-    app.listen(PORT, () => {
-      console.log(`Products Service running on port ${PORT}`);
+    swaggerDocs(app);
+
+    const INT_PORT = process.env.INT_PORT || 3000;
+    const EXT_PORT = process.env.EXT_PORT || 3000;
+
+    app.listen(INT_PORT, () => {
+      console.log(`Products Service running on port ${EXT_PORT}`);
     });
   } catch (error) {
     console.error('Failed to start the server:', error.message);
