@@ -1,6 +1,6 @@
 const express = require('express');
 const { getOrders } = require('../controllers/orderController');
-const isAuthenticated = require('../utils/isAuthenticated');
+const isAuthenticated = require('../middlewares/isAuthenticated');
 
 const router = express.Router();
 
