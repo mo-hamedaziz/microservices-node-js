@@ -57,6 +57,36 @@ services:
       - products-network
       - queue-network
 
+  orders-db: 
+    image: mongo
+    container_name: orders-db
+    restart: always
+    volumes:
+      - orders-data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${ORDER_MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${ORDER_MONGO_INITDB_ROOT_PASSWORD}
+    networks:
+      - orders-network
+  
+  orders-service:  
+    depends_on:
+      - orders-db
+      - rabbitmq
+    build:
+      context: ./orders-service
+      dockerfile: Dockerfile
+    env_file:
+      - ./orders-service/.env
+    container_name: orders-service
+    ports:
+      - "3003:3000"
+    volumes:
+      - ./orders-service:/app
+    networks:
+      - orders-network
+      - queue-network
+
   rabbitmq:
     image: rabbitmq:management
     container_name: rabbitmq
@@ -69,11 +99,14 @@ services:
 volumes:
   auth-data:
   products-data:
+  orders-data:
 
 networks:
   auth-network:
     driver: bridge
   products-network:
+    driver: bridge
+  orders-network:
     driver: bridge
   queue-network:  
     driver: bridge
