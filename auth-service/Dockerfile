@@ -32,15 +32,9 @@ ENV PATH /app/node_modules/.bin:$PATH
 FROM base as dev
 ENV NODE_ENV=development
 RUN npm install --only=development
-
-# Development command
 CMD ["npm", "run", "dev"]
 
 # Production stage
 FROM base as prod
-# Copy the entire project (excluding files listed in .dockerignore)
 COPY --chown=node:node . .
-# Ensure the service is health-checked
-HEALTHCHECK --interval=60s CMD node ./utils/healthcheck.js
-# Start the application
 CMD ["node", "index.js"]
