@@ -24,7 +24,7 @@ FROM base as dev
 RUN npm install && npm cache clean --force
 COPY --chown=node:node . .
 ENV NODE_ENV=development
-CMD ["nodemon", "index.js"]
+CMD ["npx", "nodemon", "index.js"]
 
 # Production stage
 FROM base as prod
