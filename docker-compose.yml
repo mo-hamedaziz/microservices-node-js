@@ -17,6 +17,7 @@ services:
     build:
       context: ./auth-service
       dockerfile: Dockerfile
+      target: prod
     env_file:
       - ./auth-service/.env
     container_name: auth-service
@@ -24,6 +25,7 @@ services:
       - "3001:3000"
     volumes:
       - ./auth-service:/app
+      - /app/node_modules
     networks:
       - auth-network
 
