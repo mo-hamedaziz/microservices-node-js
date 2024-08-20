@@ -1,31 +1,34 @@
+# Base image
 FROM node:20-alpine as base
 
-RUN apk add curl
-
-ARG NODE_ENV=production
-ENV NODE_ENV $NODE_ENV
-
+# Default to port 3000 for the application
 ARG PORT=3000
-ENV PORT $INT_PORT
-EXPOSE $INT_PORT
+ENV PORT $PORT
+EXPOSE $PORT
 
-RUN npm i npm@latest -g
+# Install latest npm for speed and fixes
+RUN npm install -g npm@latest
 
-RUN mkdir app && chown node:node app
+# Create app directory and set permissions
+RUN mkdir /app && chown node:node /app
 WORKDIR /app
 
+# Use non-root user
 USER node
-COPY --chown=node:node package.json package-lock.json* ./
-RUN npm install --no-optional && npm cache clean --force
-ENV PATH app/node_modules/.bin:$PATH
+
+# Copy package files and install dependencies
+COPY --chown=node:node package*.json ./
 
 # Development stage
 FROM base as dev
+RUN npm install && npm cache clean --force
+COPY --chown=node:node . .
 ENV NODE_ENV=development
-RUN npm install --only=development
-CMD ["npm", "run", "dev"]
+CMD ["npx", "nodemon", "index.js"]
 
 # Production stage
 FROM base as prod
+RUN npm install --only=production && npm cache clean --force
 COPY --chown=node:node . .
+ENV NODE_ENV=production
 CMD ["node", "index.js"]

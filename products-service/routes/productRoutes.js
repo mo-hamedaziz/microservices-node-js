@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { getAllProducts, createProduct, buyProducts } = require('../controllers/ProductController');
-const isAuthenticated = require('../utils/isAuthenticatedUtil');
+const isAuthenticated = require('../middlewares/isAuthenticated');
 
 /**
  * @openapi
