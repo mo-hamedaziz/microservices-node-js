@@ -27,11 +27,10 @@ const startServer = async () => {
 
     swaggerDocs(app);
 
-    const INT_PORT = process.env.INT_PORT || 3000;
-    const EXT_PORT = process.env.EXT_PORT || 3000;
+    const PORT = process.env.PORT || 3000;
 
-    app.listen(INT_PORT, () => {
-      console.log(`Orders Service running on port ${EXT_PORT}`);
+    app.listen(PORT, () => {
+      console.log(`Orders Service running on port ${PORT}`);
     });
   } catch (error) {
     console.error('Failed to start the server:', error.message);
