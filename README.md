@@ -125,7 +125,23 @@ Each microservice has its own API documentation generated with Swagger. This all
 - **Authentication Service**: `http://localhost:${AUTH_SERVICE_PORT}/api-docs`
 - **Orders Service**: `http://localhost:${ORDER_SERVICE_PORT}/api-docs`
 - **Products Service**: `http://localhost:${PRODUCT_SERVICE_PORT}/api-docs`
-    
+
+## Setup & Installation
+To see the project in action, follow these steps:
+1. Clone the repository:
+```bash
+git clone <repository-url>
+```
+2. Navigate to the project directory:
+```bash
+cd <project-directory>
+```
+3. Create a .env file for each service based on the provided .env.sample files.
+4. Run the services using Docker Compose:
+```bash
+docker-compose up --build
+```
+5. Access the services through the URLs provided above, and try to send some requests.
 
 
 
