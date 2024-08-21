@@ -7,6 +7,24 @@ This project is a demonstration of a microservices-based architecture for an e-c
 
 ## Table of Contents
 
+- [MicroShop API Project](#microshop-api-project)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Architecture](#architecture)
+    - [Why This Architecture?](#why-this-architecture)
+  - [Technologies Used](#technologies-used)
+  - [Services](#services)
+    - [Authentication Service](#authentication-service)
+    - [Orders Service](#orders-service)
+    - [Products Service](#products-service)
+  - [Event-Driven Communication](#event-driven-communication)
+  - [Docker and Containerization](#docker-and-containerization)
+    - [docker-compose.yml explanation:](#docker-composeyml-explanation)
+  - [Running the services](#running-the-services)
+    - [Accessing the services](#accessing-the-services)
+  - [Swagger Documentation](#swagger-documentation)
+  - [Setup \& Installation](#setup--installation)
+  - [Conclusion](#conclusion)
 
 ## Overview
 
@@ -148,7 +166,3 @@ This project showcases a microservices-based approach to building scalable, main
 
 **Feel free to explore the code and provide feedback or contribute to the project.**
 You can reach me via my email: mohamedaziz.bchini@insat.ucar.tn
-
-
-
-
