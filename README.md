@@ -143,7 +143,11 @@ docker-compose up --build
 ```
 5. Access the services through the URLs provided above, and try to send some requests.
 
+## Conclusion
+This project showcases a microservices-based approach to building scalable, maintainable, and resilient applications. The event-driven architecture ensures loose coupling between services, making the system more adaptable to change and easier to maintain. With Docker and RabbitMQ, the services are isolated and can communicate efficiently, resulting in a robust application that can handle complex workflows and high loads.
 
+**Feel free to explore the code and provide feedback or contribute to the project.**
+You can reach me via my email: mohamedaziz.bchini@insat.ucar.tn
 
 
 
