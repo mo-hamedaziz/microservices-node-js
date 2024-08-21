@@ -21,6 +21,10 @@ This project is a demonstration of a microservices-based architecture for an e-c
 9. [Demo](#demo)
 10. [Conclusion](#conclusion)
 
+## Overview
+
+This project is a proof-of-concept for implementing a scalable and maintainable microservices architecture using Node.js, Express.js, and MongoDB. The key idea is to separate concerns into different services that handle specific aspects of the application.
+
 ## Diagram
 ![image](https://github.com/user-attachments/assets/cd5883d0-5e4b-42bd-9a41-a70a55ca55f4)
 
