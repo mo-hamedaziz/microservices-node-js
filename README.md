@@ -120,7 +120,11 @@ Once the services are up, you can access them at the following URLs:
 - **RabbitMQ Management Console (Web UI)**: `http://localhost:15672 (Default login: guest/guest)`
 
 ## Swagger Documentation
+Each microservice has its own API documentation generated with Swagger. This allows you to test the API endpoints directly from the browser and see the available routes, request parameters, and responses.
 
+- **Authentication Service**: `http://localhost:${AUTH_SERVICE_PORT}/api-docs`
+- **Orders Service**: `http://localhost:${ORDER_SERVICE_PORT}/api-docs`
+- **Products Service**: `http://localhost:${PRODUCT_SERVICE_PORT}/api-docs`
     
 
 
