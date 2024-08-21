@@ -45,6 +45,15 @@ These services communicate asynchronously via RabbitMQ queues:
 - **Fault Tolerance**: Failure in one service does not bring down the entire system.
 - **Flexibility**: New services can be added without impacting existing ones.
 
+## Technologies Used
+
+- **Node.js & Express.js**: Backend framework for building RESTful APIs.
+- **MongoDB**: NoSQL database for data storage.
+- **RabbitMQ**: Message broker for asynchronous communication between services.
+- **Docker**: Containerization of services for consistent environments.
+- **Docker Compose**: Tool for defining and running multi-container Docker applications.
+- **Swagger**: API documentation and testing.
+
 ## Diagram
 ![image](https://github.com/user-attachments/assets/cd5883d0-5e4b-42bd-9a41-a70a55ca55f4)
 
