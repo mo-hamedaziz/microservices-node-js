@@ -17,6 +17,7 @@ This project is a demonstration of a microservices-based architecture for an e-c
     - [Authentication Service](#authentication-service)
     - [Orders Service](#orders-service)
     - [Products Service](#products-service)
+  - [Event-Driven Communication](#event-driven-communication)
   - [Diagram](#diagram)
 
 ## Overview
@@ -77,6 +78,22 @@ The Products Service handles:
 - Managing product catalog (CRUD operations).
 - Listening to product-related events from RabbitMQ.
 - Exposing API endpoints for product information.
+
+## Event-Driven Communication
+
+The services use RabbitMQ for asynchronous communication. This decouples the services, allowing them to operate independently while still interacting through events.
+
+- **Product Events**: 
+  - Product created
+  - Product updated
+  - Product deleted
+- **Order Events**:
+  - Order created
+  - Order updated
+  - Order fulfilled
+
+This setup ensures that services are only loosely coupled and can scale or fail independently without affecting the overall system.
+
 
 ## Diagram
 ![image](https://github.com/user-attachments/assets/cd5883d0-5e4b-42bd-9a41-a70a55ca55f4)
