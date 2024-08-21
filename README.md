@@ -25,6 +25,26 @@ This project is a demonstration of a microservices-based architecture for an e-c
 
 This project is a proof-of-concept for implementing a scalable and maintainable microservices architecture using Node.js, Express.js, and MongoDB. The key idea is to separate concerns into different services that handle specific aspects of the application.
 
+## Architecture
+
+The architecture consists of three main services:
+
+1. **Authentication Service**: Manages user authentication and authorization.
+2. **Orders Service**: Manages order creation, tracking, and history.
+3. **Products Service**: Handles product catalog management.
+
+These services communicate asynchronously via RabbitMQ queues:
+
+- **Product Queue**: Handles messages related to product updates or actions.
+- **Orders Queue**: Handles messages related to order processing.
+
+### Why This Architecture?
+
+- **Scalability**: Each service can be scaled independently based on load.
+- **Maintainability**: Codebases are small and focused on a single responsibility.
+- **Fault Tolerance**: Failure in one service does not bring down the entire system.
+- **Flexibility**: New services can be added without impacting existing ones.
+
 ## Diagram
 ![image](https://github.com/user-attachments/assets/cd5883d0-5e4b-42bd-9a41-a70a55ca55f4)
 
