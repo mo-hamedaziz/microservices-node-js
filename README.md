@@ -7,19 +7,17 @@ This project is a demonstration of a microservices-based architecture for an e-c
 
 ## Table of Contents
 
-1. [Overview](#overview)
-2. [Architecture](#architecture)
-3. [Technologies Used](#technologies-used)
-4. [Services](#services)
-   - [Authentication Service](#authentication-service)
-   - [Orders Service](#orders-service)
-   - [Products Service](#products-service)
-5. [Event-Driven Communication](#event-driven-communication)
-6. [Docker and Containerization](#docker-and-containerization)
-7. [Swagger Documentation](#swagger-documentation)
-8. [Running the Project](#running-the-project)
-9. [Demo](#demo)
-10. [Conclusion](#conclusion)
+- [MicroShop API Project](#microshop-api-project)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Architecture](#architecture)
+    - [Why This Architecture?](#why-this-architecture)
+  - [Technologies Used](#technologies-used)
+  - [Services](#services)
+    - [Authentication Service](#authentication-service)
+    - [Orders Service](#orders-service)
+    - [Products Service](#products-service)
+  - [Diagram](#diagram)
 
 ## Overview
 
@@ -53,6 +51,32 @@ These services communicate asynchronously via RabbitMQ queues:
 - **Docker**: Containerization of services for consistent environments.
 - **Docker Compose**: Tool for defining and running multi-container Docker applications.
 - **Swagger**: API documentation and testing.
+
+## Services
+
+### Authentication Service
+
+The Authentication Service handles:
+
+- User registration and login.
+- Token generation using JWT.
+- Middleware for protecting routes in Orders and Products services.
+
+### Orders Service
+
+The Orders Service handles:
+
+- Creating and managing orders.
+- Listening to order-related events from RabbitMQ.
+- Exposing API endpoints for order retrieval and management.
+
+### Products Service
+
+The Products Service handles:
+
+- Managing product catalog (CRUD operations).
+- Listening to product-related events from RabbitMQ.
+- Exposing API endpoints for product information.
 
 ## Diagram
 ![image](https://github.com/user-attachments/assets/cd5883d0-5e4b-42bd-9a41-a70a55ca55f4)
