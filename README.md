@@ -18,7 +18,8 @@ This project is a demonstration of a microservices-based architecture for an e-c
     - [Orders Service](#orders-service)
     - [Products Service](#products-service)
   - [Event-Driven Communication](#event-driven-communication)
-  - [Diagram](#diagram)
+  - [Docker and Containerization](#docker-and-containerization)
+    - [docker-compose.yml explanation:](#docker-composeyml-explanation)
 
 ## Overview
 
@@ -36,6 +37,8 @@ These services communicate asynchronously via RabbitMQ queues:
 
 - **Product Queue**: Handles messages related to product updates or actions.
 - **Orders Queue**: Handles messages related to order processing.
+
+![image](https://github.com/user-attachments/assets/cd5883d0-5e4b-42bd-9a41-a70a55ca55f4)
 
 ### Why This Architecture?
 
@@ -94,9 +97,24 @@ The services use RabbitMQ for asynchronous communication. This decouples the ser
 
 This setup ensures that services are only loosely coupled and can scale or fail independently without affecting the overall system.
 
+## Docker and Containerization
 
-## Diagram
-![image](https://github.com/user-attachments/assets/cd5883d0-5e4b-42bd-9a41-a70a55ca55f4)
+Docker is used to containerize each service, ensuring consistency across different environments and simplifying deployment. Docker Compose manages the multi-container setup, allowing all services to be started with a single command.
+
+### docker-compose.yml explanation:
+- **Services**:
+
+    - auth-db, products-db, and orders-db: MongoDB instances for each service, each in its own isolated network.
+    - auth-service, products-service, and orders-service: The microservices responsible for authentication, product management, and order management, respectively. Each service has its own network and interacts with its corresponding MongoDB instance.
+    - rabbitmq: The RabbitMQ broker used for handling the asynchronous communication between services.
+- **Networks**:
+
+    - Separate networks are created for each service, ensuring that communication is only allowed between services that need to interact directly.
+    - queue-network is shared between RabbitMQ and services that need to publish or consume messages.
+- **Volumes**:
+
+    - Persistent storage is configured for the MongoDB instances to ensure data is retained even if the containers are restarted.
+    
 
 
 
