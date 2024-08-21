@@ -7,19 +7,6 @@ This project is a demonstration of a microservices-based architecture for an e-c
 
 ## Table of Contents
 
-- [MicroShop API Project](#microshop-api-project)
-  - [Table of Contents](#table-of-contents)
-  - [Overview](#overview)
-  - [Architecture](#architecture)
-    - [Why This Architecture?](#why-this-architecture)
-  - [Technologies Used](#technologies-used)
-  - [Services](#services)
-    - [Authentication Service](#authentication-service)
-    - [Orders Service](#orders-service)
-    - [Products Service](#products-service)
-  - [Event-Driven Communication](#event-driven-communication)
-  - [Docker and Containerization](#docker-and-containerization)
-    - [docker-compose.yml explanation:](#docker-composeyml-explanation)
 
 ## Overview
 
@@ -114,6 +101,26 @@ Docker is used to containerize each service, ensuring consistency across differe
 - **Volumes**:
 
     - Persistent storage is configured for the MongoDB instances to ensure data is retained even if the containers are restarted.
+  
+## Running the services
+To build and run the services, simply use:
+```bash
+docker-compose up --build
+```
+This command will build the images, set up the containers, and start the entire application stack.
+
+*Note: Make sure the ports are not allocated by other services on your OS.
+
+### Accessing the services
+Once the services are up, you can access them at the following URLs:
+
+- **Authentication Service**: `http://localhost:${AUTH_SERVICE_PORT}`
+- **Orders Service**: `http://localhost:${ORDER_SERVICE_PORT}`
+- **Products Service**: `http://localhost:${PRODUCT_SERVICE_PORT}`
+- **RabbitMQ Management Console (Web UI)**: `http://localhost:15672 (Default login: guest/guest)`
+
+## Swagger Documentation
+
     
 
 
