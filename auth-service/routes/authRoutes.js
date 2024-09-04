@@ -16,6 +16,9 @@ const router = express.Router();
  *           schema:
  *             type: object
  *             properties:
+ *               name: 
+ *                type: string
+ *                example: John Doe
  *               email:
  *                 type: string
  *                 example: user@example.com
