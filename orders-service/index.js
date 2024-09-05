@@ -23,6 +23,11 @@ const startServer = async () => {
 
     // Start the Express server
     app.use(express.json());
+
+    app.get("/", (req, res) => {
+      res.send("Hello, welcome to the Orders Service!");
+    });
+
     app.use('/api', productRoutes);
 
     swaggerDocs(app);

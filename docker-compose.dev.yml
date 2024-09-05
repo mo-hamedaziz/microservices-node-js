@@ -17,7 +17,7 @@ services:
     build:
       context: ./auth-service
       dockerfile: Dockerfile
-      target: prod
+      target: dev #prod
     env_file:
       - ./auth-service/.env
     container_name: auth-service
@@ -25,9 +25,9 @@ services:
       - "${AUTH_SERVICE_PORT}:${AUTH_SERVICE_PORT}"
     # Use this only if you're targeting dev
     # Use this after installing packages locally and then run it
-    # volumes:
-    #   - ./auth-service:/app
-    #   - /app/node_modules
+    volumes:
+      - ./auth-service:/app
+      - /app/node_modules
     networks:
       - auth-network
 
@@ -50,7 +50,7 @@ services:
     build:
       context: ./products-service
       dockerfile: Dockerfile
-      target: prod
+      target: dev #prod
     env_file: 
       - ./products-service/.env
     container_name: products-service
@@ -58,9 +58,9 @@ services:
       - "${PRODUCT_SERVICE_PORT}:${PRODUCT_SERVICE_PORT}"
     # Use this only if you're targeting dev
     # Use this after installing packages locally and then run it
-    # volumes:
-    #   - ./products-service:/app
-    #   - /app/node_modules
+    volumes:
+      - ./products-service:/app
+      - /app/node_modules
     networks:
       - products-network
       - queue-network
@@ -84,7 +84,7 @@ services:
     build:
       context: ./orders-service
       dockerfile: Dockerfile
-      target: prod
+      target: dev #prod
     env_file:
       - ./orders-service/.env
     container_name: orders-service
@@ -92,9 +92,9 @@ services:
       - "${ORDER_SERVICE_PORT}:${ORDER_SERVICE_PORT}"
     # Use this only if you're targeting dev
     # Use this after installing packages locally and then run it
-    # volumes:
-    #   - ./orders-service:/app
-    #   - /app/node_modules
+    volumes:
+      - ./orders-service:/app
+      - /app/node_modules
     networks:
       - orders-network
       - queue-network
