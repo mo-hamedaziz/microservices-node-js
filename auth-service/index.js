@@ -17,6 +17,11 @@ const startServer = async () => {
 
     // Start the Express server
     app.use(express.json());
+
+    app.get("/", (req, res) => {
+      res.send("Hello, welcome to the Authentication Service!");
+    });
+
     app.use("/auth", authRoutes);
 
     swaggerDocs(app);
